@@ -220,3 +220,25 @@
         font-size: 18px;
     }
 }
+.carousel-container {
+  width: 100%;
+  max-width: 1200px; /* Ou o tamanho que preferir */
+  margin: auto;
+  overflow: hidden; /* Esconde as fotos que não estão no centro */
+  position: relative;
+}
+
+.carousel-track {
+  display: flex;
+  transition: transform 0.5s ease-in-out; /* Velocidade da transição */
+}
+
+.slide {
+  min-width: 100%; /* Mostra uma foto por vez */
+  box-sizing: border-box;
+}
+
+.slide img {
+  width: 100%;
+  display: block;
+}
