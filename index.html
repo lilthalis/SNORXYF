@@ -15,9 +15,9 @@
 
         body {
             background-color: #f4f4f4;
+            scroll-behavior: smooth;
         }
 
-        /* HEADER */
         .header {
             display: flex;
             justify-content: space-between;
@@ -42,7 +42,6 @@
             font-size: 14px;
         }
 
-        /* HERO / CARROSSEL */
         .hero {
             position: relative;
             height: 500px;
@@ -96,7 +95,6 @@
             font-weight: bold;
         }
 
-        /* PRODUTOS */
         .produtos {
             padding: 50px 5%;
             text-align: center;
@@ -131,7 +129,6 @@
             cursor: pointer;
         }
 
-        /* FOOTER */
         .footer {
             background: #333;
             color: #fff;
@@ -150,18 +147,17 @@
     <nav class="menu">
         <a href="#inicio">Início</a>
         <a href="#produtos">Produtos</a>
-        <a href="#lancamentos">Lançamentos</a>
         <a href="#contato">Contato</a>
-        <a href="#carrinho">🛒 Carrinho</a>
+        <a href="#" id="carrinho-btn">🛒 Carrinho (<span id="cart-count">0</span>)</a>
     </nav>
 </header>
 
 <section class="hero">
     <div class="carousel-container">
         <div class="carousel-track" id="track">
-            <div class="slide"><img src="a/as.jpg" alt="Banner 1"></div>
-            <div class="slide"><img src="a/es.jpg" alt="Banner 2"></div>
-            <div class="slide"><img src="a/os.jpg" alt="Banner 3"></div>
+            <div class="slide"><img src="a/lo.jpg" alt="Banner 1"></div>
+            <div class="slide"><img src="a/ko.jpg" alt="Banner 2"></div>
+            <div class="slide"><img src="a/jo.jpg" alt="Banner 3"></div>
         </div>
     </div>
 
@@ -180,21 +176,21 @@
             <img src="a/foto.png" alt="Produto 1">
             <h3>Air Max Plus TN 1</h3>
             <p>R$355,00</p>
-            <button>Comprar</button>
+            <button onclick="adicionarAoCarrinho('Air Max Plus TN 1', 355)">Comprar</button>
         </div>
 
         <div class="card">
             <img src="a/foto2.png" alt="Produto 2">
             <h3>Asics Gel NYC</h3>
             <p>R$387,00</p>
-            <button>Comprar</button>
+            <button onclick="adicionarAoCarrinho('Asics Gel NYC', 387)">Comprar</button>
         </div>
 
         <div class="card">
             <img src="a/foto3.png" alt="Produto 3">
             <h3>Mihara Yasuhiro</h3>
             <p>R$411,00</p>
-            <button>Comprar</button>
+            <button onclick="adicionarAoCarrinho('Mihara Yasuhiro', 411)">Comprar</button>
         </div>
     </div>
 </section>
@@ -211,15 +207,41 @@
 
     function moverCarrossel() {
         index++;
-
-        if (index >= slides.length) {
-            index = 0;
-        }
-
+        if (index >= slides.length) index = 0;
         track.style.transform = `translateX(-${index * 100}%)`;
     }
 
     setInterval(moverCarrossel, 3000);
+
+    let carrinho = [];
+    const cartCount = document.getElementById('cart-count');
+
+    function adicionarAoCarrinho(nome, preco) {
+        carrinho.push({ nome, preco });
+        cartCount.innerText = carrinho.length;
+        alert(`🛒 ${nome} adicionado ao carrinho!`);
+    }
+
+    document.getElementById('carrinho-btn').addEventListener('click', function(e) {
+        e.preventDefault();
+
+        if (carrinho.length === 0) {
+            alert('Seu carrinho está vazio 😅');
+            return;
+        }
+
+        let resumo = '🛒 SEU CARRINHO:\n\n';
+        let total = 0;
+
+        carrinho.forEach((item, index) => {
+            resumo += `${index + 1}. ${item.nome} - R$${item.preco}\n`;
+            total += item.preco;
+        });
+
+        resumo += `\nTotal: R$${total}`;
+
+        alert(resumo);
+    });
 </script>
 
 </body>
