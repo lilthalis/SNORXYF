@@ -3,31 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minha Loja de Roupa</title>
+    <title>Minha Coleção</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<header>
+<!-- HEADER -->
+<header class="header" id="inicio">
     <div class="logo">
-        <img src="logo1.jpg" alt="Logo da Minha Coleção">
-        
+        <img src="img/logo1.jpg" alt="Logo Minha Coleção">
     </div>
 
-    <nav>
+    <nav class="menu">
+        <a href="#inicio">Início</a>
         <a href="#produtos">Produtos</a>
-        <a href="#destaques">Destaques</a>
+        <a href="#masculino">Masculino</a>
+        <a href="#feminino">Feminino</a>
+        <a href="#acessorios">Acessórios</a>
+        <a href="#lancamentos">Lançamentos</a>
+        <a href="#promocoes">Promoções</a>
         <a href="#sobre">Sobre</a>
         <a href="#contato">Contato</a>
+        <a href="#carrinho" class="cart">🛒 Carrinho</a>
     </nav>
 </header>
 
+<!-- HERO -->
 <section class="hero">
     <h1>Roupas & Acessórios Exclusivos</h1>
     <p>Frete grátis acima de R$399,90</p>
     <a href="#produtos" class="btn">Comprar Agora</a>
 </section>
 
+<!-- PRODUTOS -->
 <section id="produtos" class="produtos">
     <h2>Produtos</h2>
 
@@ -55,38 +63,23 @@
     </div>
 </section>
 
-<section id="destaques">
+<!-- DESTAQUES -->
+<section id="lancamentos" class="destaques">
     <h2>Destaques</h2>
-    <p>Promoções e Lançamentos!</p>
+    <p>Promoções e lançamentos exclusivos para você.</p>
+</section>
 
-    <div class="card">
-        <img src="img/tenis.jpg" alt="Tênis">
-        <h3>Tênis Esportivo</h3>
-        <p>R$199,90</p>
-        <butto
- <div class="card">
-            <img src="img/bermuda.jpg" alt="Bermuda">
-            <h3>Bermuda Casual</h3>
-            <p>R$99,90</p>
-            <button>Comprar</button>
-        </div>
-        <header class="header">
-    <div class="logo">
-        <a href="#inicio">
-            <img src="img/logo.png" alt="Logo Minha Coleção">
-        </a>
-    </div>
+<!-- SOBRE -->
+<section id="sobre" class="sobre">
+    <h2>Sobre Nós</h2>
+    <p>Somos referência em moda urbana, oferecendo estilo, qualidade e exclusividade.</p>
+</section>
 
-    <nav class="menu">
-        <a href="#inicio">Início</a>
-        <a href="#produtos">Produtos</a>
-        <a href="#masculino">Masculino</a>
-        
-        <a href="#acessorios">Acessórios</a>
-        <a href="#lancamentos">Lançamentos</a>
-        <a href="#promocoes">Promoções</a>
-        <a href="#sobre">Sobre Nós</a>
-        <a href="#contato">Contato</a>
-        <a href="#carrinho" class="cart">🛒 Carrinho</a>
-    </nav>
-</header>
+<!-- FOOTER -->
+<footer id="contato" class="footer">
+    <p>Contato: contato@minhacolecao.com</p>
+    <p>© 2026 Minha Coleção</p>
+</footer>
+
+</body>
+</html>
