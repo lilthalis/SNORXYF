@@ -4,21 +4,32 @@ body {
     padding: 0;
 }
 
+/* HEADER */
 header {
     background: #000;
     color: #fff;
-    padding: 15px;
+    padding: 15px 40px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+header .logo img {
+    height: 60px; /* tamanho do logo */
 }
 
 header nav a {
     color: #fff;
     margin-left: 15px;
     text-decoration: none;
+    font-weight: bold;
 }
 
+header nav a:hover {
+    text-decoration: underline;
+}
+
+/* HERO */
 .hero {
     background: #333;
     color: #fff;
@@ -32,8 +43,15 @@ header nav a {
     padding: 10px 20px;
     text-decoration: none;
     font-weight: bold;
+    display: inline-block;
+    margin-top: 15px;
 }
 
+.hero .btn:hover {
+    background: #000;
+}
+
+/* PRODUTOS */
 .produtos {
     padding: 40px 20px;
     text-align: center;
@@ -56,6 +74,20 @@ header nav a {
     width: 100%;
 }
 
+.card button {
+    background: #000;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.card button:hover {
+    background: #333;
+}
+
+/* FOOTER */
 footer {
     background: #000;
     color: #fff;
