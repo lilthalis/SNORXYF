@@ -1,12 +1,14 @@
 <script>
-const slides = document.querySelectorAll('.fade-slide');
-let currentSlide = 0;
+document.addEventListener("DOMContentLoaded", () => {
+    const slides = document.querySelectorAll(".fade-slide");
+    let index = 0;
 
-function trocarSlide() {
-    slides[currentSlide].classList.remove('active');
-    currentSlide = (currentSlide + 1) % slides.length;
-    slides[currentSlide].classList.add('active');
-}
+    function trocarSlide() {
+        slides[index].classList.remove("active");
+        index = (index + 1) % slides.length;
+        slides[index].classList.add("active");
+    }
 
-setInterval(trocarSlide, 3500);
+    setInterval(trocarSlide, 3500);
+});
 </script>

@@ -153,11 +153,7 @@
             color: #fff;
         }
 
-        .card button:hover {
-            opacity: 0.9;
-        }
-
-        /* CARRINHO MODAL */
+        /* CARRINHO */
         .cart-modal {
             position: fixed;
             top: 0;
@@ -184,15 +180,6 @@
             margin-bottom: 15px;
         }
 
-        .cart-header h2 {
-            font-size: 18px;
-        }
-
-        .cart-header span {
-            cursor: pointer;
-            font-size: 20px;
-        }
-
         .cart-items {
             flex: 1;
             overflow-y: auto;
@@ -211,11 +198,6 @@
             border: none;
             color: red;
             cursor: pointer;
-            font-size: 14px;
-        }
-
-        .cart-footer {
-            margin-top: 10px;
         }
 
         .cart-footer button {
@@ -229,7 +211,6 @@
             border-radius: 5px;
         }
 
-        /* FOOTER */
         .footer {
             background: #333;
             color: #fff;
@@ -271,7 +252,7 @@
 
     <div class="cards">
         <div class="card">
-            <img src="a/foto.png" alt="Produto 1">
+            <img src="a/foto.png">
             <h3>Air Max Plus TN 1</h3>
             <p>R$355,00</p>
             <div class="actions">
@@ -281,7 +262,7 @@
         </div>
 
         <div class="card">
-            <img src="a/foto2.png" alt="Produto 2">
+            <img src="a/foto2.png">
             <h3>Asics Gel NYC</h3>
             <p>R$387,00</p>
             <div class="actions">
@@ -291,7 +272,7 @@
         </div>
 
         <div class="card">
-            <img src="a/foto3.png" alt="Produto 3">
+            <img src="a/foto3.png">
             <h3>Mihara Yasuhiro</h3>
             <p>R$411,00</p>
             <div class="actions">
@@ -302,15 +283,12 @@
     </div>
 </section>
 
-<!-- MODAL CARRINHO -->
 <div class="cart-modal" id="cartModal">
     <div class="cart-header">
-        <h2>Seu Carrinho</h2>
+        <h3>Seu Carrinho</h3>
         <span onclick="fecharCarrinho()">✖</span>
     </div>
-
     <div class="cart-items" id="cartItems"></div>
-
     <div class="cart-footer">
         <button onclick="finalizarCompra()">Finalizar no WhatsApp</button>
     </div>
@@ -322,81 +300,77 @@
 </footer>
 
 <script>
-    /* CARROSSEL FADE */
-    const slides = document.querySelectorAll('.fade-slide');
-    let current = 0;
+/* CARROSSEL */
+const slides = document.querySelectorAll('.fade-slide');
+let current = 0;
 
-    function trocarSlide() {
-        slides[current].classList.remove('active');
-        current = (current + 1) % slides.length;
-        slides[current].classList.add('active');
+setInterval(() => {
+    slides[current].classList.remove('active');
+    current = (current + 1) % slides.length;
+    slides[current].classList.add('active');
+}, 3500);
+
+/* CARRINHO */
+let carrinho = [];
+const cartCount = document.getElementById('cart-count');
+const cartItems = document.getElementById('cartItems');
+const cartModal = document.getElementById('cartModal');
+
+function adicionarAoCarrinho(nome, preco) {
+    carrinho.push({ nome, preco });
+    atualizarCarrinho();
+    abrirCarrinho();
+}
+
+function removerDoCarrinho(index) {
+    carrinho.splice(index, 1);
+    atualizarCarrinho();
+}
+
+function atualizarCarrinho() {
+    cartItems.innerHTML = '';
+    carrinho.forEach((item, index) => {
+        cartItems.innerHTML += `
+            <div class="cart-item">
+                <span>${item.nome} - R$${item.preco}</span>
+                <button onclick="removerDoCarrinho(${index})">x</button>
+            </div>
+        `;
+    });
+    cartCount.innerText = carrinho.length;
+}
+
+function abrirCarrinho() {
+    cartModal.classList.add('active');
+}
+
+function fecharCarrinho() {
+    cartModal.classList.remove('active');
+}
+
+function finalizarCompra() {
+    if (carrinho.length === 0) {
+        alert('Seu carrinho está vazio 😅');
+        return;
     }
 
-    setInterval(trocarSlide, 3500);
+    let mensagem = 'Olá, gostaria de comprar:\n';
+    let total = 0;
 
-    /* CARRINHO */
-    let carrinho = [];
-    const cartCount = document.getElementById('cart-count');
-    const cartItems = document.getElementById('cartItems');
-    const cartModal = document.getElementById('cartModal');
+    carrinho.forEach(item => {
+        mensagem += `- ${item.nome} (R$${item.preco})\n`;
+        total += item.preco;
+    });
 
-    function adicionarAoCarrinho(nome, preco) {
-        carrinho.push({ nome, preco });
-        atualizarCarrinho();
-    }
+    mensagem += `\nTotal: R$${total}`;
 
-    function removerDoCarrinho(index) {
-        carrinho.splice(index, 1);
-        atualizarCarrinho();
-    }
+    window.open(`https://w.app/zerokal?text=${encodeURIComponent(mensagem)}`, '_blank');
+}
 
-    function atualizarCarrinho() {
-        cartItems.innerHTML = '';
-        carrinho.forEach((item, index) => {
-            cartItems.innerHTML += `
-                <div class="cart-item">
-                    <span>${item.nome} - R$${item.preco}</span>
-                    <button onclick="removerDoCarrinho(${index})">x</button>
-                </div>
-            `;
-        });
-        cartCount.innerText = carrinho.length;
-    }
-
-    function abrirCarrinho() {
-        cartModal.classList.add('active');
-    }
-
-    function fecharCarrinho() {
-        cartModal.classList.remove('active');
-    }
-
-    function finalizarCompra() {
-        if (carrinho.length === 0) {
-            alert('Seu carrinho está vazio 😅');
-            return;
-        }
-
-        let mensagem = 'Olá, gostaria de comprar:\n';
-        let total = 0;
-
-        carrinho.forEach(item => {
-            mensagem += `- ${item.nome} (R$${item.preco})\n`;
-            total += item.preco;
-        });
-
-        mensagem += `\nTotal: R$${total}`;
-
-        const link = `https://w.app/zerokal?text=${encodeURIComponent(mensagem)}`;
-        window.open(link, '_blank');
-    }
-
-    /* COMPRAR DIRETO */
-    function comprarWhatsApp(nome, preco) {
-        const mensagem = `Olá, tenho interesse no produto: ${nome} - R$${preco}`;
-        const link = `https://w.app/zerokal?text=${encodeURIComponent(mensagem)}`;
-        window.open(link, '_blank');
-    }
+function comprarWhatsApp(nome, preco) {
+    const msg = `Olá, tenho interesse no produto: ${nome} - R$${preco}`;
+    window.open(`https://w.app/zerokal?text=${encodeURIComponent(msg)}`, '_blank');
+}
 </script>
 
 </body>
