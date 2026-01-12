@@ -41,7 +41,7 @@ body {
     color: #e63946;
 }
 
-/* HERO / CARROSSEL FADE */
+/* HERO / CARROSSEL */
 .hero {
     position: relative;
     height: 500px;
@@ -49,7 +49,6 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
     text-align: center;
 }
 
@@ -79,6 +78,7 @@ body {
     background: rgba(0, 0, 0, 0.55);
     padding: 30px 40px;
     border-radius: 10px;
+    color: #fff;
 }
 
 .hero-content h1 {
@@ -119,16 +119,20 @@ body {
 
 .cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 25px;
     margin-top: 35px;
+    align-items: stretch;
 }
 
 .card {
     background: #fff;
-    padding: 15px;
+    padding: 20px 20px 25px;
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     transition: 0.3s;
 }
 
@@ -137,37 +141,43 @@ body {
     box-shadow: 0 8px 25px rgba(0,0,0,0.12);
 }
 
+/* IMAGEM PADRÃO */
 .card img {
     width: 100%;
-    border-radius: 10px;
+    height: 220px;
+    object-fit: contain;
+    margin-bottom: 15px;
 }
 
+/* TEXTO */
 .card h3 {
-    margin: 12px 0 5px;
-    font-size: 18px;
+    margin: 5px 0;
+    font-size: 16px;
 }
 
 .card p {
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     font-weight: bold;
     color: #e63946;
+    font-size: 15px;
 }
 
-/* AÇÕES DOS PRODUTOS */
+/* AÇÕES */
 .card .actions {
     display: flex;
     gap: 10px;
-    margin-top: 10px;
+    margin-top: auto;
 }
 
 .card button {
     flex: 1;
     border: none;
-    padding: 10px;
+    padding: 12px 0;
     cursor: pointer;
     border-radius: 8px;
     font-weight: bold;
-    transition: 0.3s;
+    transition: 0.2s;
+    font-size: 14px;
 }
 
 .btn-cart {
@@ -177,6 +187,7 @@ body {
 
 .btn-cart:hover {
     background: #c72f3c;
+    transform: scale(1.03);
 }
 
 .btn-buy {
@@ -186,6 +197,7 @@ body {
 
 .btn-buy:hover {
     background: #000;
+    transform: scale(1.03);
 }
 
 /* CARRINHO MODAL */
@@ -248,7 +260,7 @@ body {
     font-size: 16px;
 }
 
-/* FOOTER DO CARRINHO */
+/* FOOTER CARRINHO */
 .cart-footer {
     margin-top: 15px;
 }
@@ -298,42 +310,4 @@ body {
     .cart-modal {
         width: 100%;
     }
-}
-.hero {
-    position: relative;
-    height: 500px;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-}
-
-.carousel-fade {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-}
-
-.fade-slide {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 0;
-    transition: opacity 1s ease-in-out;
-}
-
-.fade-slide.active {
-    opacity: 1;
-}
-
-.hero-content {
-    position: relative;
-    z-index: 2;
-    background: rgba(0, 0, 0, 0.55);
-    padding: 30px 40px;
-    border-radius: 10px;
-    color: #fff;
 }
