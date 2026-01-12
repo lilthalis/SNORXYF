@@ -60,6 +60,7 @@
             position: absolute;
             inset: 0;
             z-index: 1;
+            background: #222; /* Fundo de segurança */
         }
 
         .fade-slide {
@@ -69,7 +70,7 @@
             height: 100%;
             object-fit: cover;
             opacity: 0;
-            transition: opacity 1s ease-in-out;
+            transition: opacity 1.2s ease-in-out;
         }
 
         .fade-slide.active {
@@ -229,7 +230,7 @@
     <nav class="menu">
         <a href="#inicio">Início</a>
         <a href="#produtos">Produtos</a>
-        <a onclick="abrirCarrinho()">🛒 Carrinho (<span id="cart-count">0</span>)</a>
+        <a onclick="abrirCarrinho()" style="cursor:pointer">🛒 Carrinho (<span id="cart-count">0</span>)</a>
     </nav>
 </header>
 
@@ -286,7 +287,7 @@
 <div class="cart-modal" id="cartModal">
     <div class="cart-header">
         <h3>Seu Carrinho</h3>
-        <span onclick="fecharCarrinho()">✖</span>
+        <span onclick="fecharCarrinho()" style="cursor:pointer">✖</span>
     </div>
     <div class="cart-items" id="cartItems"></div>
     <div class="cart-footer">
@@ -300,17 +301,27 @@
 </footer>
 
 <script>
-/* CARROSSEL */
-const slides = document.querySelectorAll('.fade-slide');
-let current = 0;
+/* SCRIPT DO CARROSSEL (AGUARDANDO O HTML) */
+document.addEventListener("DOMContentLoaded", function() {
+    const slides = document.querySelectorAll('.fade-slide');
+    let current = 0;
+    const tempo = 3500;
 
-setInterval(() => {
-    slides[current].classList.remove('active');
-    current = (current + 1) % slides.length;
-    slides[current].classList.add('active');
-}, 3500);
+    if (slides.length > 0) {
+        setInterval(() => {
+            // Remove a visibilidade da imagem atual
+            slides[current].classList.remove('active');
+            
+            // Pula para a próxima (e volta para a primeira no final)
+            current = (current + 1) % slides.length;
+            
+            // Mostra a próxima imagem
+            slides[current].classList.add('active');
+        }, tempo);
+    }
+});
 
-/* CARRINHO */
+/* SCRIPT DO CARRINHO */
 let carrinho = [];
 const cartCount = document.getElementById('cart-count');
 const cartItems = document.getElementById('cartItems');
@@ -363,13 +374,13 @@ function finalizarCompra() {
     });
 
     mensagem += `\nTotal: R$${total}`;
-
-    window.open(`https://w.app/zerokal?text=${encodeURIComponent(mensagem)}`, '_blank');
+    // Usando wa.me que é mais universal
+    window.open(`https://wa.me/553288422465?text=${encodeURIComponent(mensagem)}`, '_blank');
 }
 
 function comprarWhatsApp(nome, preco) {
     const msg = `Olá, tenho interesse no produto: ${nome} - R$${preco}`;
-    window.open(`https://w.app/zerokal?text=${encodeURIComponent(msg)}`, '_blank');
+    window.open(`https://wa.me/553288422465?text=${encodeURIComponent(msg)}`, '_blank');
 }
 </script>
 
