@@ -1,388 +1,244 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cosmic Playground </title>
-
+    <title>COSMIC PLAYGROUND | OFFICIAL STORE</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
-
         body {
-            background-color: #f4f4f4;
-            scroll-behavior: smooth;
-        }
-
-        /* HEADER */
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 5%;
-            background: #fff;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .logo img {
-            height: 50px;
-        }
-
-        .menu a {
-            text-decoration: none;
-            color: #333;
-            margin-left: 15px;
-            font-weight: bold;
-            font-size: 14px;
-            cursor: pointer;
-        }
-
-        /* HERO / CARROSSEL FADE */
-        .hero {
-            position: relative;
-            height: 500px;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            text-align: center;
-        }
-
-        .carousel-fade {
-            position: absolute;
-            inset: 0;
-            z-index: 1;
-            background: #222; /* Fundo de segurança */
-        }
-
-        .fade-slide {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0;
-            transition: opacity 1.2s ease-in-out;
-        }
-
-        .fade-slide.active {
-            opacity: 1;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            background: rgba(0, 0, 0, 0.5);
-            padding: 30px;
-            border-radius: 8px;
-        }
-
-        .btn {
-            display: inline-block;
-            margin-top: 15px;
-            padding: 12px 25px;
-            background: #e63946;
+            font-family: 'Inter', sans-serif;
+            background-color: #050505;
             color: #fff;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
+            overflow-x: hidden;
         }
 
-        /* PRODUTOS */
-        .produtos {
-            padding: 50px 5%;
-            text-align: center;
-        }
-
-        .cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-top: 30px;
-        }
-
-        .card {
-            background: #fff;
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
-
-        .card img {
-            width: 100%;
-            border-radius: 5px;
-        }
-
-        .card h3 {
-            margin: 10px 0 5px;
-        }
-
-        .card p {
-            margin-bottom: 10px;
-            font-weight: bold;
-        }
-
-        .card .actions {
-            display: flex;
-            gap: 10px;
-        }
-
-        .card button {
-            flex: 1;
-            border: none;
-            padding: 10px;
-            cursor: pointer;
-            border-radius: 5px;
-            font-weight: bold;
-        }
-
-        .btn-buy {
-            background: #333;
-            color: #fff;
-        }
-
-        .btn-cart {
-            background: #e63946;
-            color: #fff;
-        }
-
-        /* CARRINHO */
-        .cart-modal {
+        /* Animated Cosmic Background */
+        .cosmic-bg {
             position: fixed;
             top: 0;
-            right: -400px;
-            width: 350px;
-            height: 100%;
-            background: #fff;
-            box-shadow: -2px 0 10px rgba(0,0,0,0.2);
-            transition: 0.3s;
-            z-index: 2000;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .cart-modal.active {
-            right: 0;
-        }
-
-        .cart-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-
-        .cart-items {
-            flex: 1;
-            overflow-y: auto;
-        }
-
-        .cart-item {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 5px;
-        }
-
-        .cart-item button {
-            background: none;
-            border: none;
-            color: red;
-            cursor: pointer;
-        }
-
-        .cart-footer button {
+            left: 0;
             width: 100%;
-            padding: 12px;
-            background: #25d366;
-            border: none;
-            color: #fff;
-            font-weight: bold;
-            cursor: pointer;
-            border-radius: 5px;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at center, #1a1a2e 0%, #050505 100%);
         }
 
-        .footer {
+        .stars {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(1px 1px at 20px 30px, #fff, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 100px 150px, #fff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 200px 300px, #fff, rgba(0,0,0,0));
+            background-size: 300px 300px;
+            opacity: 0.3;
+            animation: moveStars 100s linear infinite;
+        }
+
+        @keyframes moveStars {
+            from { background-position: 0 0; }
+            to { background-position: 1000px 1000px; }
+        }
+
+        .product-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .product-card:hover {
+            border-color: #ff4500;
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-link {
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #ff4500;
+            transition: width 0.3s;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #050505;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
             background: #333;
-            color: #fff;
-            text-align: center;
-            padding: 20px;
-            margin-top: 50px;
+            border-radius: 10px;
         }
     </style>
 </head>
-<body>
+<body class="custom-scrollbar">
 
-<header class="header" id="inicio">
-    <div class="logo">
-        <img src="a/logo1.jpg" alt="Logo">
+    <div class="cosmic-bg">
+        <div class="stars"></div>
     </div>
-    <nav class="menu">
-        <a href="#inicio">Início</a>
-        <a href="#produtos">Produtos</a>
-        <a onclick="abrirCarrinho()" style="cursor:pointer">🛒 Carrinho (<span id="cart-count">0</span>)</a>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-md border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <!-- Your Saturn Icon SVG -->
+                <svg class="w-8 h-8" viewBox="0 0 100 100" fill="none">
+                    <rect x="47" y="50" width="6" height="30" rx="3" fill="white"/>
+                    <rect x="35" y="70" width="30" height="6" rx="3" fill="white"/>
+                    <circle cx="50" cy="30" r="12" fill="#FF4500"/>
+                    <ellipse cx="50" cy="30" rx="22" ry="4" transform="rotate(15 50 30)" stroke="white" stroke-width="2"/>
+                </svg>
+                <span class="font-black tracking-tighter text-xl">CPG</span>
+            </div>
+            
+            <div class="hidden md:flex space-x-8 text-xs font-bold tracking-widest uppercase">
+                <a href="#shop" class="nav-link">Shop</a>
+                <a href="#music" class="nav-link">Music</a>
+                <a href="#visuals" class="nav-link">Visuals</a>
+                <a href="#about" class="nav-link">About</a>
+            </div>
+
+            <div class="flex space-x-4 items-center">
+                <button class="text-xs font-bold uppercase tracking-widest hover:text-red-500">Cart (0)</button>
+            </div>
+        </div>
     </nav>
-</header>
 
-<section class="hero">
-    <div class="carousel-fade">
-        <img src="a/as.jpg" class="fade-slide active">
-        <img src="a/es.jpg" class="fade-slide">
-        <img src="a/os.jpg" class="fade-slide">
-    </div>
+    <!-- Hero Section -->
+    <header class="relative h-screen flex flex-col justify-center items-center text-center px-4">
+        <h1 class="text-7xl md:text-9xl font-black italic tracking-tighter mb-4 animate-pulse">
+            COSMIC<br><span class="text-red-600">PLAYGROUND</span>
+        </h1>
+        <p class="text-sm md:text-base tracking-[0.3em] uppercase text-gray-400 mb-8">Welcome to the park that never existed</p>
+        <a href="#shop" class="px-10 py-4 bg-white text-black font-black uppercase tracking-widest text-sm hover:bg-red-600 hover:text-white transition-all duration-300">
+            Enter the Shop
+        </a>
+    </header>
 
-    <div class="hero-content">
-        <h1>Roupas & Acessórios Exclusivos</h1>
-        <p>Frete grátis acima de R$200,90</p>
-        <a href="#produtos" class="btn">Comprar Agora</a>
-    </div>
-</section>
-
-<section id="produtos" class="produtos">
-    <h2>Produtos em Destaque</h2>
-
-    <div class="cards">
-        <div class="card">
-            <img src="a/foto.png">
-            <h3></h3>
-            <p>R$355,00</p>
-            <div class="actions">
-                <button class="btn-cart" onclick="adicionarAoCarrinho('Air Max Plus TN 1', 355)">Adicionar</button>
-                <button class="btn-buy" onclick="comprarWhatsApp('Air Max Plus TN 1', 355)">Comprar</button>
-            </div>
+    <!-- Shop Section -->
+    <section id="shop" class="max-w-7xl mx-auto px-6 py-24">
+        <div class="flex flex-col md:flex-row justify-between items-end mb-12 space-y-4">
+            <h2 class="text-4xl font-black uppercase italic tracking-tighter">Season 01: The Drop</h2>
+            <p class="text-gray-500 text-sm tracking-widest font-bold uppercase">Limited Edition Streetwear</p>
         </div>
 
-        <div class="card">
-            <img src="a/foto2.png">
-            <h3>Asics Gel NYC</h3>
-            <p>R$387,00</p>
-            <div class="actions">
-                <button class="btn-cart" onclick="adicionarAoCarrinho('Asics Gel NYC', 387)">Adicionar</button>
-                <button class="btn-buy" onclick="comprarWhatsApp('Asics Gel NYC', 387)">Comprar</button>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Product 1 -->
+            <div class="product-card p-6">
+                <div class="aspect-square bg-zinc-900 mb-6 flex items-center justify-center overflow-hidden">
+                    <!-- Placeholder for Hoodie -->
+                    <span class="text-zinc-700 font-bold uppercase tracking-widest">CPG Hoodie 01</span>
+                </div>
+                <h3 class="font-bold uppercase tracking-wider mb-2">Saturn Head Hoodie</h3>
+                <p class="text-red-500 font-bold mb-4">$85.00</p>
+                <button class="w-full py-3 border border-white/20 text-xs font-bold uppercase tracking-widest hover:bg-white hover:text-black transition-all">Add to Bag</button>
+            </div>
+
+            <!-- Product 2 -->
+            <div class="product-card p-6">
+                <div class="aspect-square bg-zinc-900 mb-6 flex items-center justify-center overflow-hidden">
+                    <span class="text-zinc-700 font-bold uppercase tracking-widest">CPG Graphic Tee</span>
+                </div>
+                <h3 class="font-bold uppercase tracking-wider mb-2">Amusement Park Tee</h3>
+                <p class="text-red-500 font-bold mb-4">$45.00</p>
+                <button class="w-full py-3 border border-white/20 text-xs font-bold uppercase tracking-widest hover:bg-white hover:text-black transition-all">Add to Bag</button>
+            </div>
+
+            <!-- Product 3 -->
+            <div class="product-card p-6">
+                <div class="aspect-square bg-zinc-900 mb-6 flex items-center justify-center overflow-hidden">
+                    <span class="text-zinc-700 font-bold uppercase tracking-widest">CPG Accessory</span>
+                </div>
+                <h3 class="font-bold uppercase tracking-wider mb-2">Cosmic Beanie</h3>
+                <p class="text-red-500 font-bold mb-4">$30.00</p>
+                <button class="w-full py-3 border border-white/20 text-xs font-bold uppercase tracking-widest hover:bg-white hover:text-black transition-all">Add to Bag</button>
             </div>
         </div>
+    </section>
 
-        <div class="card">
-            <img src="a/foto3.png">
-            <h3>Mihara Yasuhiro</h3>
-            <p>R$411,00</p>
-            <div class="actions">
-                <button class="btn-cart" onclick="adicionarAoCarrinho('Mihara Yasuhiro', 411)">Adicionar</button>
-                <button class="btn-buy" onclick="comprarWhatsApp('Mihara Yasuhiro', 411)">Comprar</button>
+    <!-- Music/Album Section -->
+    <section id="music" class="bg-zinc-950 py-24">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center gap-12">
+            <div class="w-full md:w-1/2">
+                <div class="aspect-square bg-gradient-to-tr from-purple-900 to-red-600 shadow-2xl rounded-lg flex items-center justify-center p-12">
+                     <h2 class="text-5xl font-black text-white italic tracking-tighter text-center">COSMIC<br>PLAYGROUND<br>ALBUM</h2>
+                </div>
+            </div>
+            <div class="w-full md:w-1/2">
+                <h2 class="text-5xl font-black uppercase italic tracking-tighter mb-6">Listen to the Experience</h2>
+                <p class="text-gray-400 mb-8 leading-relaxed">The sonic landscape of the park. Inspired by the cosmic journey and the thrill of the unknown. Available on all streaming platforms.</p>
+                <div class="space-y-4">
+                    <button class="flex items-center space-x-4 w-full p-4 bg-white/5 border border-white/10 hover:bg-white/10 transition">
+                        <span class="w-8 h-8 flex items-center justify-center bg-green-500 rounded-full text-black">▶</span>
+                        <span class="font-bold uppercase tracking-widest text-sm">Listen on Spotify</span>
+                    </button>
+                    <button class="flex items-center space-x-4 w-full p-4 bg-white/5 border border-white/10 hover:bg-white/10 transition">
+                        <span class="w-8 h-8 flex items-center justify-center bg-red-500 rounded-full text-white">▶</span>
+                        <span class="font-bold uppercase tracking-widest text-sm">Listen on Apple Music</span>
+                    </button>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<div class="cart-modal" id="cartModal">
-    <div class="cart-header">
-        <h3>Seu Carrinho</h3>
-        <span onclick="fecharCarrinho()" style="cursor:pointer">✖</span>
-    </div>
-    <div class="cart-items" id="cartItems"></div>
-    <div class="cart-footer">
-        <button onclick="finalizarCompra()">Finalizar no WhatsApp</button>
-    </div>
-</div>
-
-<footer class="footer">
-    <p>Contato: 32 8842-2465</p>
-    <p>© 2026 Minha Coleção.</p>
-</footer>
-
-<script>
-/* SCRIPT DO CARROSSEL (AGUARDANDO O HTML) */
-document.addEventListener("DOMContentLoaded", function() {
-    const slides = document.querySelectorAll('.fade-slide');
-    let current = 0;
-    const tempo = 3500;
-
-    if (slides.length > 0) {
-        setInterval(() => {
-            // Remove a visibilidade da imagem atual
-            slides[current].classList.remove('active');
+    <!-- Footer -->
+    <footer class="border-t border-white/10 py-24 px-6 bg-black">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
+            <div class="col-span-1 md:col-span-2">
+                <div class="flex items-center space-x-2 mb-6">
+                    <svg class="w-10 h-10" viewBox="0 0 100 100" fill="none">
+                        <rect x="47" y="50" width="6" height="30" rx="3" fill="white"/>
+                        <rect x="35" y="70" width="30" height="6" rx="3" fill="white"/>
+                        <circle cx="50" cy="30" r="12" fill="#FF4500"/>
+                        <ellipse cx="50" cy="30" rx="22" ry="4" transform="rotate(15 50 30)" stroke="white" stroke-width="2"/>
+                    </svg>
+                    <span class="font-black tracking-tighter text-2xl">CPG</span>
+                </div>
+                <p class="text-gray-500 text-sm max-w-sm">The Official Cosmic PlayGround Experience. Apparel, Music, and Visuals from the park that never was.</p>
+            </div>
             
-            // Pula para a próxima (e volta para a primeira no final)
-            current = (current + 1) % slides.length;
-            
-            // Mostra a próxima imagem
-            slides[current].classList.add('active');
-        }, tempo);
-    }
-});
-
-/* SCRIPT DO CARRINHO */
-let carrinho = [];
-const cartCount = document.getElementById('cart-count');
-const cartItems = document.getElementById('cartItems');
-const cartModal = document.getElementById('cartModal');
-
-function adicionarAoCarrinho(nome, preco) {
-    carrinho.push({ nome, preco });
-    atualizarCarrinho();
-    abrirCarrinho();
-}
-
-function removerDoCarrinho(index) {
-    carrinho.splice(index, 1);
-    atualizarCarrinho();
-}
-
-function atualizarCarrinho() {
-    cartItems.innerHTML = '';
-    carrinho.forEach((item, index) => {
-        cartItems.innerHTML += `
-            <div class="cart-item">
-                <span>${item.nome} - R$${item.preco}</span>
-                <button onclick="removerDoCarrinho(${index})">x</button>
+            <div>
+                <h4 class="font-bold uppercase tracking-widest text-xs mb-6 text-white">Links</h4>
+                <ul class="text-gray-500 text-sm space-y-4 uppercase tracking-tighter">
+                    <li><a href="#" class="hover:text-white transition">Shipping info</a></li>
+                    <li><a href="#" class="hover:text-white transition">Returns</a></li>
+                    <li><a href="#" class="hover:text-white transition">Contact</a></li>
+                    <li><a href="#" class="hover:text-white transition">Privacy</a></li>
+                </ul>
             </div>
-        `;
-    });
-    cartCount.innerText = carrinho.length;
-}
 
-function abrirCarrinho() {
-    cartModal.classList.add('active');
-}
-
-function fecharCarrinho() {
-    cartModal.classList.remove('active');
-}
-
-function finalizarCompra() {
-    if (carrinho.length === 0) {
-        alert('Seu carrinho está vazio 😅');
-        return;
-    }
-
-    let mensagem = 'Olá, gostaria de comprar:\n';
-    let total = 0;
-
-    carrinho.forEach(item => {
-        mensagem += `- ${item.nome} (R$${item.preco})\n`;
-        total += item.preco;
-    });
-
-    mensagem += `\nTotal: R$${total}`;
-    // Usando wa.me que é mais universal
-    window.open(`https://wa.me/553288422465?text=${encodeURIComponent(mensagem)}`, '_blank');
-}
-
-function comprarWhatsApp(nome, preco) {
-    const msg = `Olá, tenho interesse no produto: ${nome} - R$${preco}`;
-    window.open(`https://wa.me/553288422465?text=${encodeURIComponent(msg)}`, '_blank');
-}
-</script>
+            <div>
+                <h4 class="font-bold uppercase tracking-widest text-xs mb-6 text-white">Follow the Ride</h4>
+                <div class="flex space-x-6 text-xl text-gray-500">
+                    <a href="#" class="hover:text-red-500">IG</a>
+                    <a href="#" class="hover:text-red-500">YT</a>
+                    <a href="#" class="hover:text-red-500">SP</a>
+                    <a href="#" class="hover:text-red-500">TW</a>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto mt-24 text-center text-xs text-zinc-800 uppercase tracking-widest font-bold">
+            &copy; 2026 Cosmic PlayGround. Built for the void.
+        </div>
+    </footer>
 
 </body>
 </html>
